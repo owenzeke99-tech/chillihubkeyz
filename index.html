@@ -1,0 +1,790 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090708">
+<title>Chilli Hub Key | Access Portal</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --red: #ff263f;
+  --red-light: #ff5368;
+  --orange: #ff7043;
+  --bg: #080708;
+  --panel: rgba(20, 15, 17, .86);
+  --muted: #999097;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html { min-height: 100%; }
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 35px 18px;
+  overflow-x: hidden;
+  background: var(--bg);
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  position: relative;
+  isolation: isolate;
+}
+
+button { font: inherit; }
+
+.background {
+  position: fixed;
+  inset: 0;
+  z-index: -5;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 50% 43%, #45101938, transparent 46%),
+    radial-gradient(ellipse at 0% 100%, #ff263f10, transparent 38%),
+    #080708;
+}
+
+.grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(#ff455410 1px, transparent 1px),
+    linear-gradient(90deg, #ff455410 1px, transparent 1px);
+  background-size: 46px 46px;
+  mask-image: linear-gradient(to bottom, transparent, #000 20%, #000 70%, transparent);
+  animation: gridMove 18s linear infinite;
+}
+
+@keyframes gridMove {
+  from { transform: translateY(0); }
+  to { transform: translateY(46px); }
+}
+
+.ambient {
+  position: absolute;
+  width: 370px;
+  height: 370px;
+  border-radius: 50%;
+  filter: blur(110px);
+  pointer-events: none;
+  opacity: .23;
+  animation: ambientFloat 10s ease-in-out infinite alternate;
+}
+
+.ambient.a {
+  top: -170px;
+  left: -120px;
+  background: #ff193d;
+}
+
+.ambient.b {
+  bottom: -200px;
+  right: -100px;
+  background: #ff6230;
+  animation-delay: -5s;
+}
+
+@keyframes ambientFloat {
+  from { transform: translate(0, 0) scale(.9); }
+  to { transform: translate(100px, 80px) scale(1.25); }
+}
+
+.scanline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 180px;
+  top: -200px;
+  background: linear-gradient(transparent, #ff263f06, transparent);
+  animation: scan 10s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes scan {
+  to { top: 120%; }
+}
+
+#particles {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  pointer-events: none;
+}
+
+.page {
+  width: 100%;
+  max-width: 470px;
+  position: relative;
+  animation: pageIn .9s cubic-bezier(.2,.8,.2,1) both;
+}
+
+@keyframes pageIn {
+  from { opacity: 0; transform: translateY(30px) scale(.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* BRAND */
+
+.brand {
+  text-align: center;
+  margin-bottom: 31px;
+}
+
+.logo-wrap {
+  width: 102px;
+  height: 102px;
+  margin: 0 auto 21px;
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.logo-ring {
+  position: absolute;
+  inset: 0;
+  border: 1px solid #ff3b554c;
+  border-radius: 30px;
+  transform: rotate(45deg) scale(.78);
+  animation: ringPulse 4s ease-in-out infinite;
+}
+
+.logo-ring.two {
+  inset: 7px;
+  border-color: #ff764433;
+  animation-delay: -2s;
+  transform: rotate(0deg) scale(.93);
+}
+
+@keyframes ringPulse {
+  0%, 100% { opacity: .45; }
+  50% { opacity: 1; }
+}
+
+.logo {
+  width: 76px;
+  height: 76px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #ff485e70;
+  border-radius: 23px;
+  background: linear-gradient(145deg, #351218, #151013 70%);
+  box-shadow: 0 0 38px #ff263f25, inset 0 0 24px #ff263f10;
+  position: relative;
+  z-index: 1;
+  animation: logoGlow 3s ease-in-out infinite alternate;
+}
+
+.logo svg {
+  width: 47px;
+  height: 47px;
+  filter: drop-shadow(0 0 10px #ff392f);
+  animation: flame 3s ease-in-out infinite;
+}
+
+@keyframes logoGlow {
+  from { box-shadow: 0 0 20px #ff263f18, inset 0 0 15px #ff263f08; }
+  to { box-shadow: 0 0 45px #ff263f45, inset 0 0 25px #ff263f18; }
+}
+
+@keyframes flame {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-3px) scale(1.06); }
+}
+
+.eyebrow {
+  color: #ff6476;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 4px;
+  margin-bottom: 11px;
+}
+
+.brand h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(29px, 8vw, 40px);
+  font-weight: 900;
+  line-height: 1.3;
+  letter-spacing: -1.8px;
+  text-shadow: 0 0 35px #ff263f16;
+}
+
+.brand h1 .white {
+  color: #fff;
+}
+
+.brand h1 .red {
+  background: linear-gradient(110deg, #ff344d 10%, #ff7650 90%);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  filter: drop-shadow(0 0 17px #ff263f40);
+}
+
+.brand-sub {
+  color: #a49aa0;
+  margin-top: 12px;
+  font-size: 11px;
+  letter-spacing: 3px;
+  font-weight: 600;
+}
+
+.brand-line {
+  width: 85px;
+  height: 2px;
+  margin: 19px auto 0;
+  border-radius: 5px;
+  background: linear-gradient(90deg, transparent, var(--red), var(--orange), transparent);
+  box-shadow: 0 0 15px #ff263f70;
+}
+
+/* MAIN PANEL */
+
+.card {
+  position: relative;
+  overflow: hidden;
+  padding: 28px;
+  border-radius: 22px;
+  background: var(--panel);
+  border: 1px solid #ff53681d;
+  box-shadow: 0 30px 100px #0009, 0 0 50px #ff263f09;
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  transition: border-color .35s, box-shadow .35s;
+}
+
+.card:hover {
+  border-color: #ff53683d;
+  box-shadow: 0 30px 100px #0009, 0 0 55px #ff263f12;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 12%;
+  width: 76%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #ff354f, #ff7650, transparent);
+  box-shadow: 0 0 18px #ff263f70;
+}
+
+.card::after {
+  content: "";
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  top: -140px;
+  right: -100px;
+  border-radius: 50%;
+  background: #ff263f16;
+  filter: blur(40px);
+  pointer-events: none;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #47f69b;
+  box-shadow: 0 0 12px #47f69b;
+  animation: statusPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes statusPulse {
+  50% { opacity: .4; box-shadow: 0 0 3px #47f69b; }
+}
+
+.status-text {
+  font-size: 10px;
+  color: #d8d0d3;
+  letter-spacing: 2.5px;
+  font-weight: 800;
+}
+
+.status-tag {
+  padding: 5px 8px;
+  font-size: 9px;
+  color: #ff7685;
+  border: 1px solid #ff263f32;
+  background: #ff263f0c;
+  border-radius: 5px;
+  letter-spacing: 1px;
+}
+
+.section-title {
+  font-size: 11px;
+  font-weight: 800;
+  color: #c7bec2;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
+
+.key-box {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+  padding: 13px 11px 13px 14px;
+  border: 1px solid #ff3e572c;
+  border-radius: 12px;
+  background: #090809d9;
+  transition: .3s;
+}
+
+.key-box:focus-within,
+.key-box:hover {
+  border-color: #ff3e577a;
+  box-shadow: 0 0 25px #ff263f0b;
+}
+
+.key-value {
+  min-width: 0;
+  flex: 1;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.7;
+  color: #fff1f3;
+  overflow-wrap: anywhere;
+  user-select: text;
+}
+
+.icon-btn {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border: 1px solid #ff3e572b;
+  border-radius: 9px;
+  background: #ff263f0d;
+  color: #ff6577;
+  cursor: pointer;
+  transition: .25s;
+}
+
+.icon-btn svg {
+  width: 17px;
+  height: 17px;
+}
+
+.icon-btn:hover {
+  background: #ff263f;
+  color: #fff;
+  border-color: #ff263f;
+  transform: translateY(-2px);
+}
+
+.copy-btn {
+  width: 100%;
+  min-height: 53px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+  border: 1px solid #ff6475;
+  border-radius: 11px;
+  background: linear-gradient(105deg, #e91f3a, #ff3547 53%, #ff6544);
+  color: white;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  cursor: pointer;
+  box-shadow: 0 8px 28px #ff263f24, inset 0 1px #ffffff26;
+  transition: transform .25s, box-shadow .25s, filter .25s;
+}
+
+.copy-btn::before {
+  content: "";
+  position: absolute;
+  top: -80%;
+  left: -50%;
+  width: 28%;
+  height: 260%;
+  background: #ffffff26;
+  transform: rotate(25deg);
+  transition: left .6s ease;
+}
+
+.copy-btn:hover::before { left: 130%; }
+
+.copy-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 13px 36px #ff263f42;
+  filter: brightness(1.1);
+}
+
+.copy-btn:active { transform: scale(.98); }
+
+.copy-btn svg {
+  width: 17px;
+  height: 17px;
+  position: relative;
+}
+
+.tip {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 14px;
+  margin-top: 20px;
+  border: 1px solid #ff536816;
+  border-radius: 11px;
+  background: linear-gradient(100deg, #ff263f09, #ff704304);
+}
+
+.tip-icon {
+  flex-shrink: 0;
+  font-size: 17px;
+}
+
+.tip-title {
+  color: #ff7685;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  margin-bottom: 5px;
+}
+
+.tip-text {
+  color: #a99ea3;
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 23px;
+}
+
+.footer-top {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  color: #a89ba0;
+  font-size: 10px;
+  letter-spacing: 2px;
+  font-weight: 800;
+}
+
+.footer-top span { color: #ff465b; }
+
+.footer-bottom {
+  color: #61585c;
+  font-size: 10px;
+  margin-top: 9px;
+  letter-spacing: .5px;
+}
+
+.footer-line {
+  width: 35px;
+  height: 1px;
+  background: #ff3e5740;
+}
+
+/* TOAST */
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 28px;
+  z-index: 20;
+  width: max-content;
+  max-width: calc(100% - 32px);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 19px;
+  border: 1px solid #ff465c70;
+  border-radius: 12px;
+  background: #171013f5;
+  box-shadow: 0 12px 45px #0009, 0 0 30px #ff263f13;
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(-50%, 20px);
+  transition: .3s;
+}
+
+.toast.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+}
+
+.toast-mark {
+  color: #5bffa4;
+  font-size: 17px;
+}
+
+@media (max-width: 480px) {
+  body { padding: 25px 15px; }
+  .brand { margin-bottom: 24px; }
+  .card { padding: 23px 18px; }
+  .logo-wrap { width: 88px; height: 88px; margin-bottom: 19px; }
+  .logo { width: 67px; height: 67px; border-radius: 20px; }
+  .logo svg { width: 42px; height: 42px; }
+  .brand-sub { font-size: 9px; letter-spacing: 2px; }
+  .key-value { font-size: 11px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
+</head>
+
+<body>
+<div class="background">
+  <div class="grid"></div>
+  <div class="ambient a"></div>
+  <div class="ambient b"></div>
+  <div class="scanline"></div>
+</div>
+
+<canvas id="particles"></canvas>
+
+<main class="page">
+
+  <header class="brand">
+    <div class="logo-wrap">
+      <div class="logo-ring"></div>
+      <div class="logo-ring two"></div>
+      <div class="logo">
+        <svg viewBox="0 0 64 64" fill="none" aria-label="Chilli flame">
+          <defs>
+            <linearGradient id="fire" x1="15" y1="6" x2="48" y2="58" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#FFB05C"/>
+              <stop offset=".45" stop-color="#FF4A42"/>
+              <stop offset="1" stop-color="#E9163C"/>
+            </linearGradient>
+          </defs>
+          <path d="M37 5C40 17 26 19 31 29C23 26 22 20 23 16C13 26 8 34 12 44C15 54 23 59 33 58C46 57 55 46 52 34C50 24 40 17 37 5Z" fill="url(#fire)"/>
+          <path d="M39 31C40 39 31 41 33 47C28 45 27 41 29 37C22 42 22 49 29 53C36 57 44 50 43 43C43 38 41 34 39 31Z" fill="#FFF0D2"/>
+          <path d="M36 10C38 5 43 4 48 7" stroke="#FFB05C" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="eyebrow">PREMIUM ACCESS PORTAL</div>
+    <h1><span class="white">CHILLI</span> <span class="red">HUB</span></h1>
+    <p class="brand-sub">YOUR KEY · YOUR ACCESS</p>
+    <div class="brand-line"></div>
+  </header>
+
+  <section class="card">
+    <div class="status">
+      <span class="status-dot"></span>
+      <span class="status-text">SYSTEM ONLINE</span>
+      <span class="status-tag">V3.0</span>
+    </div>
+
+    <div class="section-title">YOUR ACCESS KEY</div>
+
+    <div class="key-box">
+      <div class="key-value" id="keyValue">ChilliHubKskwjeoKeyMalwplwbdkdoejeljeoeoeejpqpqj</div>
+
+      <button class="icon-btn" onclick="copyKey()" aria-label="Copy access key" title="Copy Key">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="8" y="8" width="12" height="12" rx="2"/>
+          <path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/>
+        </svg>
+      </button>
+    </div>
+
+    <button class="copy-btn" onclick="copyKey()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m13 2-3 9h7L9 22l2-8H5l8-12Z"/>
+      </svg>
+      <span>COPY KEY</span>
+    </button>
+
+    <div class="tip">
+      <div class="tip-icon">🛡️</div>
+      <div>
+        <div class="tip-title">SECURE YOUR ACCESS</div>
+        <div class="tip-text">
+          Keep your key safe and avoid sharing it with strangers.
+          Use the button above to copy your key instantly.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="footer-line"></div>
+      POWERED BY <span>CHILLI HUB</span>
+      <div class="footer-line"></div>
+    </div>
+    <div class="footer-bottom">DESIGNED FOR THE NEXT LEVEL.</div>
+  </footer>
+
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="polite">
+  <span class="toast-mark">✓</span>
+  <span id="toastText">Key copied successfully!</span>
+</div>
+
+<script>
+const KEY = "ChilliHubKskwjeoKeyMalwplwbdkdoejeljeoeoeejpqpqj";
+
+let toastTimer;
+
+function showToast(message, success = true) {
+  const toast = document.getElementById("toast");
+  const toastText = document.getElementById("toastText");
+  const mark = toast.querySelector(".toast-mark");
+
+  toastText.textContent = message;
+  mark.textContent = success ? "✓" : "!";
+  mark.style.color = success ? "#5bffa4" : "#ff7685";
+
+  toast.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => {
+    toast.classList.remove("show");
+  }, 2400);
+}
+
+async function copyKey() {
+  try {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(KEY);
+    } else {
+      const area = document.createElement("textarea");
+      area.value = KEY;
+      area.style.position = "fixed";
+      area.style.left = "-9999px";
+      area.setAttribute("readonly", "");
+      document.body.appendChild(area);
+      area.select();
+
+      const copied = document.execCommand("copy");
+      area.remove();
+
+      if (!copied) throw new Error("Clipboard unavailable");
+    }
+
+    showToast("Key copied successfully!");
+  } catch (error) {
+    showToast("Copy failed. Please select the key manually.", false);
+  }
+}
+
+/* Floating glowing ember particles */
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
+
+let particles = [];
+let width = 0;
+let height = 0;
+let dpr = 1;
+let animationFrame;
+
+function resizeCanvas() {
+  dpr = Math.min(window.devicePixelRatio || 1, 2);
+  width = window.innerWidth;
+  height = window.innerHeight;
+
+  canvas.width = Math.round(width * dpr);
+  canvas.height = Math.round(height * dpr);
+  canvas.style.width = width + "px";
+  canvas.style.height = height + "px";
+
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+  const count = Math.min(65, Math.max(24, Math.floor(width / 17)));
+
+  particles = Array.from({ length: count }, () => createParticle(true));
+}
+
+function createParticle(randomY = false) {
+  return {
+    x: Math.random() * width,
+    y: randomY ? Math.random() * height : height + 10,
+    size: Math.random() * 2 + .6,
+    speedY: Math.random() * .65 + .2,
+    speedX: (Math.random() - .5) * .45,
+    opacity: Math.random() * .55 + .15,
+    phase: Math.random() * Math.PI * 2,
+    color: Math.random() > .7 ? "255,112,67" : "255,48,70"
+  };
+}
+
+function drawParticles() {
+  ctx.clearRect(0, 0, width, height);
+
+  for (const p of particles) {
+    p.y -= p.speedY;
+    p.x += p.speedX + Math.sin(p.phase) * .15;
+    p.phase += .012;
+
+    if (p.y < -10) {
+      Object.assign(p, createParticle(false));
+    }
+
+    if (p.x < -10) p.x = width + 10;
+    if (p.x > width + 10) p.x = -10;
+
+    ctx.beginPath();
+    ctx.fillStyle = `rgba(${p.color},${p.opacity})`;
+    ctx.shadowBlur = 12;
+    ctx.shadowColor = `rgb(${p.color})`;
+    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  ctx.shadowBlur = 0;
+  animationFrame = requestAnimationFrame(drawParticles);
+}
+
+resizeCanvas();
+drawParticles();
+
+window.addEventListener("resize", resizeCanvas);
+
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) {
+    cancelAnimationFrame(animationFrame);
+  } else {
+    cancelAnimationFrame(animationFrame);
+    drawParticles();
+  }
+});
+</script>
+</body>
+</html>
